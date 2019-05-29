@@ -1,23 +1,14 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import InitialData from './storage/InitialData';
+import LocalData from './storage/LocalData';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todoList: [
-        {
-          task: 'Organize Garage',
-          id: 1528817077286,
-          completed: false
-        },
-        {
-          task: 'Bake Cookies',
-          id: 1528817084358,
-          completed: false
-        }
-      ],
+      todoList: LocalData.fetchData() || InitialData,
       newTodoItem: '',
     };
   }
@@ -41,6 +32,8 @@ class App extends React.Component {
           id: Date.now(), 
           completed: false,
         });
+
+        LocalData.saveData(newTodoList);
 
         return {
           todoList: newTodoList,
