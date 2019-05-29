@@ -17,16 +17,50 @@ class App extends React.Component {
           id: 1528817084358,
           completed: false
         }
-      ]
+      ],
+      newTodoItem: '',
     };
   }
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+
+  handleChange = (event) => {
+    const itemVal = event.target.value;
+
+    this.setState(prevState => ({
+      todoList: prevState.todoList,
+      newTodoItem: itemVal,
+    }))
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (this.state.newTodoItem.trim() !== '') {
+      this.setState(prevState => {
+        const newTodoList = prevState.todoList.concat({
+          task: prevState.newTodoItem, 
+          id: Date.now(), 
+          completed: false,
+        });
+
+        return {
+          todoList: newTodoList,
+          newTodoItem: '',
+        }
+      });
+    }
+  }
+  
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <TodoList 
+          todos={this.state.todoList} 
+        />
+        <TodoForm 
+          initialVal={this.state.newTodoItem} 
+          changeHandler={this.handleChange} 
+          submitHandler={this.handleSubmit} 
+        />
       </div>
     );
   }
