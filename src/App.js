@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoHeader from './components/TodoComponents/TodoHeader';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
 import InitialData from './storage/InitialData';
@@ -10,6 +11,7 @@ class App extends React.Component {
     this.state = {
       todoList: LocalData.fetchData() || InitialData,
       newTodoItem: '',
+      filteredList: 0,
     };
   }
 
@@ -42,12 +44,35 @@ class App extends React.Component {
       });
     }
   }
+
+  handleSearch = (event) => {
+    const searchVal = event.target.value.toLowerCase();
+
+    if (searchVal.trim() !== '') {
+      this.setState(prevState => {
+        const filteredItems = prevState.todoList.filter(item => item.task.toLowerCase().includes(searchVal));
+
+        return {
+          todoList: prevState.todoList,
+          newTodoItem: prevState.newTodoItem,
+          filteredList: filteredItems,
+        }
+      });
+    } else {
+      this.setState(prevState => ({
+          todoList: prevState.todoList,
+          newTodoItem: prevState.newTodoItem,
+          filteredList: 0,
+      }));
+    }
+  }
   
   render() {
     return (
       <div>
+        <TodoHeader searchHandler={this.handleSearch} />
         <TodoList 
-          todos={this.state.todoList} 
+          todos={this.state.filteredList || this.state.todoList} 
         />
         <TodoForm 
           initialVal={this.state.newTodoItem} 
