@@ -66,6 +66,20 @@ class App extends React.Component {
       }));
     }
   }
+
+  handleCompleted = (id) => {
+    this.setState(prevState => {
+      const changedTodoList = prevState.todoList.map(todo => {
+        todo.completed = (todo.id === id? !todo.completed : todo.completed);
+        return todo;
+      });
+      LocalData.saveData(changedTodoList);
+
+      return {
+        todoList: changedTodoList,
+      };
+    });
+  }
   
   render() {
     return (
@@ -73,6 +87,7 @@ class App extends React.Component {
         <TodoHeader searchHandler={this.handleSearch} />
         <TodoList 
           todos={this.state.filteredList || this.state.todoList} 
+          doneClickHandler={this.handleCompleted}
         />
         <TodoForm 
           initialVal={this.state.newTodoItem} 
