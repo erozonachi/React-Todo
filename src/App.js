@@ -1,13 +1,84 @@
 import React from 'react';
+import TodoHeader from './components/TodoComponents/TodoHeader';
+import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
+import InitialData from './storage/InitialData';
+import LocalData from './storage/LocalData';
 
 class App extends React.Component {
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+  constructor() {
+    super();
+    this.state = {
+      todoList: LocalData.fetchData() || InitialData,
+      newTodoItem: '',
+      filteredList: 0,
+    };
+  }
+
+  handleChange = (event) => {
+    const itemVal = event.target.value;
+
+    this.setState(prevState => ({
+      todoList: prevState.todoList,
+      newTodoItem: itemVal,
+    }))
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (this.state.newTodoItem.trim() !== '') {
+      this.setState(prevState => {
+        const newTodoList = prevState.todoList.concat({
+          task: prevState.newTodoItem, 
+          id: Date.now(), 
+          completed: false,
+        });
+
+        LocalData.saveData(newTodoList);
+
+        return {
+          todoList: newTodoList,
+          newTodoItem: '',
+        }
+      });
+    }
+  }
+
+  handleSearch = (event) => {
+    const searchVal = event.target.value.toLowerCase();
+
+    if (searchVal.trim() !== '') {
+      this.setState(prevState => {
+        const filteredItems = prevState.todoList.filter(item => item.task.toLowerCase().includes(searchVal));
+
+        return {
+          todoList: prevState.todoList,
+          newTodoItem: prevState.newTodoItem,
+          filteredList: filteredItems,
+        }
+      });
+    } else {
+      this.setState(prevState => ({
+          todoList: prevState.todoList,
+          newTodoItem: prevState.newTodoItem,
+          filteredList: 0,
+      }));
+    }
+  }
+  
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <TodoHeader searchHandler={this.handleSearch} />
+        <TodoList 
+          todos={this.state.filteredList || this.state.todoList} 
+        />
+        <TodoForm 
+          initialVal={this.state.newTodoItem} 
+          changeHandler={this.handleChange} 
+          submitHandler={this.handleSubmit} 
+        />
       </div>
     );
   }

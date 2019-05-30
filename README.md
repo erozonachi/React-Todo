@@ -4,9 +4,9 @@
 
 ## Initializing the project.
 
-- `Fork and clone` this project and cd into your cloned version.
-- `yarn install` will pull in all the node_modules you need.
-- `yarn start` will start a development server on your `http://localhost:3000`.
+- [x] `Fork and clone` this project and cd into your cloned version.
+- [x] `yarn install` will pull in all the node_modules you need.
+- [x] `yarn start` will start a development server on your `http://localhost:3000`.
   - If yarn asks you to select different port with some error message, just select `Y` and it will pull it up on port 3001. This simply means you have a development server up and running on that port already.
 
 ## Instructions
@@ -40,16 +40,16 @@
 #### Day 1 Challenges
 
 - **Don't focus on styling yet**. We want you to worry about function over form today.
-- Your todo list should display a list of todos, an input field, a submit button, and a clear all button.
-- Be sure to use the given files for building out these components.
-- `<App />` will hold all the data needed for this project. It will also be the container for your Todo Components.
-  - All of your application data will be stored here on `<App />`.
-  - All of your `handler` functions should live here on `<App />`.
-- `<TodoList />` receives your Todos array and iterates over the list generating a new `<Todo />` for each element in the array.
-- `<Todo />` is a component that takes in the `todo` data and displays the task to the screen.
-- `<TodoForm>` will hold your input field and your `Add Todo` and `Clear Completed` buttons.
-  - Your input field should take in user input, and allow a user to press `Enter` or click on the `Submit Button` to add a todo to your list.
-  - Once a todo is submitted, the Todo List should re-render and show the added todo.
+- [x] Your todo list should display a list of todos, an input field, a submit button, and a clear all button.
+- [x] Be sure to use the given files for building out these components.
+- [x]  `<App />` will hold all the data needed for this project. It will also be the container for your Todo Components.
+  - [x] All of your application data will be stored here on `<App />`.
+  - [x] All of your `handler` functions should live here on `<App />`.
+- [x] `<TodoList />` receives your Todos array and iterates over the list generating a new `<Todo />` for each element in the array.
+- [x] `<Todo />` is a component that takes in the `todo` data and displays the task to the screen.
+- [x] `<TodoForm>` will hold your input field and your `Add Todo` and `Clear Completed` buttons.
+  - [x] Your input field should take in user input, and allow a user to press `Enter` or click on the `Submit Button` to add a todo to your list.
+  - [x] Once a todo is submitted, the Todo List should re-render and show the added todo.
 
 #### Day 2 Challenges
 
@@ -60,8 +60,8 @@
 
 #### Stretch Problems
 
-- **Persist your data** in `window.localStorage()` hint: you may have to pass your data to a stringifier to get it to live inside the `localStorage()` of the browser. This will cause it to persist past the page refresh.
+- [x] **Persist your data** in `window.localStorage()` hint: you may have to pass your data to a stringifier to get it to live inside the `localStorage()` of the browser. This will cause it to persist past the page refresh.
 
-- **Search Functionality** Add a input bar that allows you to search through your tasks and only show the ones that match the search input.
+- [x] **Search Functionality** Add a input bar that allows you to search through your tasks and only show the ones that match the search input.
 
-- **Hosting** Create a [Netlify Account](https://www.netlify.com/) and follow the tutorial on how to host your shiny new todo app on the world wide web.
+- [x] **Hosting** Create a [Netlify Account](https://www.netlify.com/) and follow the tutorial on how to host your shiny new todo app on the world wide web.
