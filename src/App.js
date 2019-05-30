@@ -80,6 +80,18 @@ class App extends React.Component {
       };
     });
   }
+
+  handleClearCompleted = () => {
+    this.setState(prevState => {
+      const changedTodoList = prevState.todoList.filter(item => !item.completed);
+      LocalData.saveData(changedTodoList);
+
+      return {
+        todoList: changedTodoList,
+      };
+
+    });
+  }
   
   render() {
     return (
@@ -93,6 +105,7 @@ class App extends React.Component {
           initialVal={this.state.newTodoItem} 
           changeHandler={this.handleChange} 
           submitHandler={this.handleSubmit} 
+          clearHandler={this.handleClearCompleted}
         />
       </div>
     );
