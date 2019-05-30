@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       todoList: LocalData.fetchData() || InitialData,
       newTodoItem: '',
-      filteredList: 0,
+      searchText: '',
     };
   }
 
@@ -50,21 +50,13 @@ class App extends React.Component {
     const searchVal = event.target.value.toLowerCase();
 
     if (searchVal.trim() !== '') {
-      this.setState(prevState => {
-        const filteredItems = prevState.todoList.filter(item => item.task.toLowerCase().includes(searchVal));
-
-        return {
-          todoList: prevState.todoList,
-          newTodoItem: prevState.newTodoItem,
-          filteredList: filteredItems,
-        }
+      this.setState({
+        searchText: searchVal,
       });
     } else {
-      this.setState(prevState => ({
-          todoList: prevState.todoList,
-          newTodoItem: prevState.newTodoItem,
-          filteredList: 0,
-      }));
+      this.setState({
+        searchText: '',
+      });
     }
   }
 
@@ -99,7 +91,10 @@ class App extends React.Component {
       <div className='container'>
         <TodoHeader searchHandler={this.handleSearch} />
         <TodoList 
-          todos={this.state.filteredList || this.state.todoList} 
+          todos={this.state.searchText? 
+            this.state.todoList.filter(item => item.task.toLowerCase().includes(this.state.searchText)) : 
+            this.state.todoList
+          } 
           doneClickHandler={this.handleCompleted}
         />
         <TodoForm 

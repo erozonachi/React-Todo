@@ -32,7 +32,11 @@
 .container ul {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: .2em 0;
   width: 100%;
+  color: #8b475d;
 }
 
 .container ul li {
