@@ -1,4 +1,5 @@
 import React from 'react';
+import './components/TodoComponents/Todo.css';
 import TodoHeader from './components/TodoComponents/TodoHeader';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
@@ -95,7 +96,7 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className='container'>
         <TodoHeader searchHandler={this.handleSearch} />
         <TodoList 
           todos={this.state.filteredList || this.state.todoList} 
