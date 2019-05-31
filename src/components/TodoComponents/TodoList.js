@@ -3,7 +3,10 @@ import { Todo } from './Todo';
 
 const TodoList = (props) => (
   <ul>
-    {props.todos.map(todo => <Todo key={todo.id} todo={todo} />)}
+    { props.todos.length === 0?
+      'No Todo Item Found' :
+      props.todos.map(todo => <Todo key={todo.id} todo={todo} doneClickHandler={props.doneClickHandler} />)
+    }
   </ul>
 );
 
